@@ -676,7 +676,7 @@ const ASSETS={
     tag:"Wann sah BTC schon einmal so aus — und wie ging es danach aus?",
     banner:"<b>Vergangene Häufigkeit, keine Vorhersage.</b> Das Tool zeigt echte historische Pfade nach ähnlichen Lagen. Märkte sind nicht stationär — was früher folgte, muss sich nicht wiederholen. <b>BTC hat erst ~3 vollständige Zyklen</b>: jede Statistik hier stützt sich auf sehr wenige unabhängige Fälle."},
   gold:{key:"gold",sym:"PAXGUSDT",name:"Gold",spotStart:"1980-01-01T00:00:00Z",fundStart:"2019-09-26T00:00:00Z",
-    dvol:false,epochs:false,halving:false,csvBased:true,  // Tageskerzen via gold-history.json (investing.com XAU/USD 1980-heute); PAXG als Fallback
+    dvol:false,epochs:false,halving:false,csvBased:true,allowedTF:["1d","1w","1m"],  // Tageskerzen via gold-history.json (investing.com XAU/USD 1980-heute); 4h entfällt (Tagesauflösung); PAXG als Fallback
     tag:"Wann sah Gold schon einmal so aus — und wie ging es danach aus?",
     banner:"<b>Vergangene Häufigkeit, keine Vorhersage.</b> Das Tool zeigt echte historische Pfade nach ähnlichen Lagen. Märkte sind nicht stationär. <b>Gold: Tageskerzen ab ~1979 (~46 Jahre, Stooq XAU/USD)</b> — echte Gold-Zyklen inkl. Volcker-Schock 1980, Dotcom, 2008. Ohne Worker-URL: Fallback auf PAXG (~3 Jahre)."},
 };
@@ -721,7 +721,7 @@ function applySettings(s){
       $("toggles").querySelectorAll(".tg").forEach(t=>t.classList.toggle("on",!!SHOW[t.dataset.tg]));
       $("cFund").querySelectorAll("button").forEach(b=>b.classList.toggle("on",(b.dataset.f==="1")===!!SHOW.fundReg));
     }
-    if(s.tf&&TF[s.tf]){$("cTF").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.tf===s.tf));}
+    if(s.tf&&TF[s.tf]){curTF=s.tf;$("cTF").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.tf===s.tf));}
     if(s.asset&&ASSETS[s.asset]){ASSET=ASSETS[s.asset];$("cAsset").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.asset===s.asset));}
     if(typeof s.W==="number")PENDING_W=s.W;
     syncModeUI();
@@ -740,8 +740,8 @@ function applyAssetTexts(){
   const tg=document.querySelector('.tg[data-tg="dvol"]');if(tg)tg.style.display=ASSET.dvol?"":"none";
 }
 function applyTFButtons(){
-  /* Blendet TF-Buttons ein/aus. Alle TF erlaubt für alle Assets. */
-  const allowed=Object.keys(TF);
+  /* Blendet TF-Buttons ein/aus je nach ASSET.allowedTF (falls gesetzt). */
+  const allowed=ASSET.allowedTF||Object.keys(TF);
   $("cTF").querySelectorAll("button").forEach(b=>{
     const ok=allowed.includes(b.dataset.tf);
     b.style.display=ok?"":"none";
@@ -770,7 +770,7 @@ async function init(){
   if(s)applySettings(s);
   applyAssetTexts();
   applyTFButtons();
-  await loadTF((s&&s.tf&&TF[s.tf])?s.tf:"1d");
+  await loadTF(curTF||"1d");
 }
 /* Onboarding: standardmässig sichtbar; einmal geschlossen, bleibt es geschlossen (best effort via localStorage). */
 function wireIntro(){
@@ -1368,7 +1368,8 @@ function renderClock(){
     const hrs=Object.keys(hr).map(Number).sort((a,b)=>a-b);
     html+=`<div class="clklbl">Nach Tageszeit (UTC)</div><div class="clkrow">`+hrs.map(H=>{const o=hr[H];const p=Math.round(o.pos/o.n*100);const col=p>=53?"var(--teal)":p<=47?"var(--coral)":"var(--mut)";return `<div class="clk"><div class="cd">${String(H).padStart(2,"0")}h</div><div class="cp" style="color:${col}">${p}%</div></div>`;}).join("")+`</div>`;
   }
-  if(curTF==="1w")html=`<div class="empty" style="text-align:left">Auf Wochen-Basis nicht aussagekräftig — wechsle auf 1D oder 4h für Wochentag-/Tageszeit-Muster.</div>`;
+  if(curTF==="1w")html=`<div class="empty" style="text-align:left">Auf Wochen-Basis nicht aussagekräftig — wechsle auf 1D${ASSET.allowedTF&&!ASSET.allowedTF.includes("4h")?"":" oder 4h"} für Wochentag-Muster.</div>`;
+  if(curTF==="1m")html=`<div class="empty" style="text-align:left">Auf Monats-Basis nicht aussagekräftig — wechsle auf 1D für Wochentag-Muster.</div>`;
   $("clockBox").innerHTML=html;
 }
 
