@@ -855,8 +855,14 @@ function buildChart(){
     crosshair:{mode:0},
     localization:{priceFormatter:p=>"$"+Math.round(p).toLocaleString("de-CH")}
   });
-  candleS=chart.addCandlestickSeries({upColor:"#2DD4A7",downColor:"#F0656A",borderVisible:false,wickUpColor:"#2DD4A7",wickDownColor:"#F0656A",priceLineVisible:false});
-  candleS.setData(D.raw.map(x=>({time:x.t,open:x.o,high:x.h,low:x.l,close:x.c})));
+  // Gold hat nur Close-Preise (keine OHLC) → Line statt Candlestick
+  if(ASSET.csvBased){
+    candleS=chart.addLineSeries({color:"#F0B429",lineWidth:2,priceLineVisible:true,lastValueVisible:true,crosshairMarkerVisible:true});
+    candleS.setData(D.raw.map(x=>({time:x.t,value:x.c})));
+  } else {
+    candleS=chart.addCandlestickSeries({upColor:"#2DD4A7",downColor:"#F0656A",borderVisible:false,wickUpColor:"#2DD4A7",wickDownColor:"#F0656A",priceLineVisible:false});
+    candleS.setData(D.raw.map(x=>({time:x.t,open:x.o,high:x.h,low:x.l,close:x.c})));
+  }
   sma50S=chart.addLineSeries({color:"#F0B429",lineWidth:2,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});
   sma200S=chart.addLineSeries({color:"#5B9DF0",lineWidth:2,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});
   sma50S.setData(D.t.map((t,i)=>D.s50w[i]!=null?{time:t,value:D.s50w[i]}:null).filter(Boolean));
