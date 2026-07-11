@@ -340,15 +340,15 @@ const EB={
   sim:{t:"Ähnlichkeit (Form)",what:"Wie stark die trendbereinigte Form übereinstimmen muss — Korrelation der Krümmung, nachdem aus jedem Fenster die lineare Steigung herausgerechnet wurde. 80% = nur sehr ähnlich geformte Verläufe zählen.",hist:"Achtung: Diese Prozente sind NICHT mit einer naiven Korrelation roher Preise vergleichbar — nach der Trendbereinigung fallen die Werte naturgemäss tiefer aus, weil die dominante gemeinsame Trendkomponente fehlt. Eine trendbereinigte Korrelation von 60–70% ist bereits eine echte Formähnlichkeit. Höher = strenger, weniger Treffer; wenn oben „zu wenige Analoga\" steht, hier senken."},
   tol:{t:"Regime-Toleranz",what:"Wie weit die Marktlage abweichen darf. 0 = exakt dieselben Buckets bei Mayer, RSI, Volatilität, Drawdown und Trend. Höhere Werte erlauben ähnliche, nicht identische Lagen.",hist:"Strenger (0–1) = bedeutungsvollere, aber seltenere Analoga. Lockerer = mehr Treffer, aber die Lagen sind weniger vergleichbar. Im Modus „Form\" ohne Wirkung."},
   fan:{t:"Der Forward-Fächer",what:"Jede dünne Linie ist ein ECHTER historischer Kursverlauf nach einer ähnlichen Lage, ab heute nach rechts projiziert (grün = endete höher, koralle = tiefer). Die gestrichelte indigo Linie ist der Median der Analoga — bewusst dünn und gestrichelt, damit sie nicht als Prognose-Linie missverstanden wird. Die Punkte unten markieren, wo in der Historie die Analoga liegen.",hist:"Das ist Vergangenheit, in die Zukunft gelegt — keine Vorhersage, und der Median erst recht kein Kursziel. Laufen die Linien weit auseinander, war der Ausgang historisch sehr unsicher; bündeln sie sich, war er einheitlicher. Märkte sind nicht stationär: Regimewechsel (ETF, Makro, Regulierung) können das Muster jederzeit entwerten."},
-  dist:{t:"Verteilung je Horizont",what:"Fasst die historischen Pfade je Zeithorizont zusammen. positiv = Anteil der Episoden, die höher endeten. Median = mittlere Veränderung. Spanne 10–90% = wo 80% der Ausgänge lagen. Ø grösster Dip = der typische tiefste Punkt unterwegs. Der Zeitstrahl darüber zeigt, WANN in der Historie die Episoden liegen.",hist:"Der Dip ist oft wichtiger als der Median: auch ein positiv endender Pfad kann zwischendurch tief eingebrochen sein — das ist das Pfad-Risiko, das eine reine Endzahl verschweigt. „Episoden\" sind unabhängige historische Fälle (zusammenhängende Treffer-Tage zu einem zusammengefasst). Aber Vorsicht: Die Episoden-Bereinigung löst nur die KURZFRISTIGE Autokorrelation. Klumpen alle Episoden in einer einzigen Marktphase (z.B. nur ein Bullenlauf), sind sie makroökonomisch trotzdem fast EINE Beobachtung — darum der Konzentrations-Hinweis über den Karten. BTC hat seit 2017 nur eine Handvoll wirklich unabhängiger Zyklen; eine hohe Episodenzahl täuscht leicht statistische Sicherheit vor. Die FARBE der Punkte auf dem Zeitstrahl zeigt die Markt-Epoche (grau = Prä-2020, cyan = 2020–23, gold = ETF-Ära ab 2024) — so siehst du sofort, ob die Stichprobe die heutige Marktstruktur überhaupt enthält. Auf der Gold-Seite gibt es keine Epochen-Einteilung: die PAXG-Historie beginnt erst ~2019/21 und ist EINE Ära — dort gilt die Wenige-Fälle-Warnung noch stärker."},
+  dist:{t:"Verteilung je Horizont",what:"Fasst die historischen Pfade je Zeithorizont zusammen. positiv = Anteil der Episoden, die höher endeten. Median = mittlere Veränderung. Spanne 10–90% = wo 80% der Ausgänge lagen. Ø grösster Dip = der typische tiefste Punkt unterwegs. Der Zeitstrahl darüber zeigt, WANN in der Historie die Episoden liegen.",hist:"Der Dip ist oft wichtiger als der Median: auch ein positiv endender Pfad kann zwischendurch tief eingebrochen sein — das ist das Pfad-Risiko, das eine reine Endzahl verschweigt. „Episoden\" sind unabhängige historische Fälle (zusammenhängende Treffer-Tage zu einem zusammengefasst). Aber Vorsicht: Die Episoden-Bereinigung löst nur die KURZFRISTIGE Autokorrelation. Klumpen alle Episoden in einer einzigen Marktphase (z.B. nur ein Bullenlauf), sind sie makroökonomisch trotzdem fast EINE Beobachtung — darum der Konzentrations-Hinweis über den Karten. BTC hat seit 2017 nur eine Handvoll wirklich unabhängiger Zyklen; eine hohe Episodenzahl täuscht leicht statistische Sicherheit vor. Die FARBE der Punkte auf dem Zeitstrahl zeigt die Markt-Epoche (grau = Prä-2020, cyan = 2020–23, gold = ETF-Ära ab 2024) — so siehst du sofort, ob die Stichprobe die heutige Marktstruktur überhaupt enthält. Auf der Gold-Seite gibt es keine Epochen-Einteilung: die LBMA-Historie ist eine einzige kontinuierliche Serie ohne Strukturbrüche, die sinnvolle Epochen definieren würden. Die langen Gold-Zyklen sind aber gerade der Mehrwert — Volcker-Schock 1980, Dotcom, 2008 sind alle enthalten."},
   analogs:{t:"Historische Analoga",what:"Die einzelnen Vergangenheits-Momente, die zur heutigen Lage passen — mit Datum, Ähnlichkeit (Form-Korrelation) und dem tatsächlichen Ausgang nach den drei Horizonten. Antippen springt im Chart zu diesem Moment.",hist:"So siehst du, AUS WELCHEN echten Momenten die Statistik stammt — nicht nur eine Zahl, sondern die konkreten Vorbilder. Wenige, sehr alte oder stark verstreute Analoga solltest du mit Vorsicht lesen. Der farbige Punkt vor dem Datum markiert die Markt-Epoche (grau/cyan/gold = Prä-2020 / 2020–23 / ETF-Ära)."},
-  vertrauen:{t:"Vertrauen / Belastbarkeit",what:"Ein zusammengefasstes Urteil, wie sehr du der Statistik trauen kannst — gebündelt aus drei Dingen: (1) Anzahl unabhängiger Episoden, (2) über welche Markt-Epochen sie streuen (Prä-2020 / 2020–23 / ETF-Ära ab 2024), (3) Fragilität: wie stark der Median springt, wenn man Ähnlichkeit, Toleranz ODER das Fenster nur leicht variiert — die gemessene Spannweite steht in Prozentpunkten (Pp) in der Belastbarkeits-Zeile. Das Urteil richtet sich nach dem SCHWÄCHSTEN dieser drei.",hist:"Bewusst EIN Signal statt vieler Einzelwarnungen — sonst stumpfst du gegen Caveats ab (Council-Entscheid). „fragil\" heisst nicht falsch, sondern: die Aussage hängt stark an deiner genauen Regler-Wahl, also nicht überinterpretieren. Der Epochen-Teil ist der ehrlichste: stammen fast alle Analoga aus der Vor-ETF-Zeit, beschreiben sie eine Marktstruktur, die es so nicht mehr gibt — die heutige ETF-/Institutionen-Ära ist erst ~2 Jahre alt und liefert zwangsläufig wenige Vergleichsfälle. Kein Grund, die Historie zu verwerfen, aber ein Grund, den Unsicherheitsfächer breiter zu denken. Bewusst nur ein LABEL, kein Filter — sonst würde man die Epoche so lange wählen, bis die Geschichte gefällt. Auf der Gold-Seite entfällt der Epochen-Teil des Urteils (die PAXG-Historie ist EINE Ära) — das Vertrauen stützt sich dort nur auf Stichprobengrösse und Fragilität."},
+  vertrauen:{t:"Vertrauen / Belastbarkeit",what:"Ein zusammengefasstes Urteil, wie sehr du der Statistik trauen kannst — gebündelt aus drei Dingen: (1) Anzahl unabhängiger Episoden, (2) über welche Markt-Epochen sie streuen (Prä-2020 / 2020–23 / ETF-Ära ab 2024), (3) Fragilität: wie stark der Median springt, wenn man Ähnlichkeit, Toleranz ODER das Fenster nur leicht variiert — die gemessene Spannweite steht in Prozentpunkten (Pp) in der Belastbarkeits-Zeile. Das Urteil richtet sich nach dem SCHWÄCHSTEN dieser drei.",hist:"Bewusst EIN Signal statt vieler Einzelwarnungen — sonst stumpfst du gegen Caveats ab (Council-Entscheid). „fragil\" heisst nicht falsch, sondern: die Aussage hängt stark an deiner genauen Regler-Wahl, also nicht überinterpretieren. Der Epochen-Teil ist der ehrlichste: stammen fast alle Analoga aus der Vor-ETF-Zeit, beschreiben sie eine Marktstruktur, die es so nicht mehr gibt — die heutige ETF-/Institutionen-Ära ist erst ~2 Jahre alt und liefert zwangsläufig wenige Vergleichsfälle. Kein Grund, die Historie zu verwerfen, aber ein Grund, den Unsicherheitsfächer breiter zu denken. Bewusst nur ein LABEL, kein Filter — sonst würde man die Epoche so lange wählen, bis die Geschichte gefällt. Auf der Gold-Seite entfällt der Epochen-Teil des Urteils (LBMA-Geschichte ist eine kontinuierliche Serie, keine diskrete Epochen-Einteilung sinnvoll) — das Vertrauen stützt sich dort auf Stichprobengrösse und Fragilität. Mit ~57 Jahren Daten ist das Stichproben-Problem gegenüber PAXG deutlich entschärft."},
   projektionen:{t:"Projektionen",what:"Drei unabhängige Sichten auf die mögliche Streuung ab heute, je einzeln ein-/ausblendbar. Analog-Fächer = echte Vergangenheits-Pfade nach ähnlichen Lagen (grün endete höher, koralle tiefer; gestrichelte Linie = Median). Bootstrap-Kegel = tausende simulierte Pfade aus BTCs Schwankung, um den heutigen Preis zentriert (reine Streuung, keine Richtung). DVOL-Band = die vom Optionsmarkt erwartete Streuung (±1σ/2σ).",hist:"Jede misst anders: der Fächer rückblickend-konkret inkl. echtem Drift, der Bootstrap driftfrei-simuliert, das DVOL-Band vorausschauend aus Optionspreisen (~30-Tage-Vola per Wurzel-t skaliert; enthält eine Risikoprämie, liegt also strukturell etwas über realisiert). Decken sich alle drei, ist das Bild konsistenter. Keine davon ist eine Vorhersage."},
   linien:{t:"Linien",what:"Orientierungs-Marken auf den Kerzen, je einzeln zuschaltbar. Runde Zahlen ($10k-Marken). Swing-Level (jüngste Pivot-Hochs/-Tiefs als weiche S/R — Koralle=Widerstand, Teal=Unterstützung). Volume Profile (POC = meistgehandeltes Level + Value Area = 70%-Volumen-Band der letzten 90 Tage).",hist:"Weiche behaviorale Orientierung — an solchen Marken clustern reale Orders/Stops, sie wirken oft als Magnet oder S/R, sind aber keine garantierten Wendepunkte. Das Volume Profile ist GEMESSEN (echtes Volumen), aber eine APPROXIMATION: echtes Volumen-pro-Preis bräuchte Tick-Daten (nicht frei machbar), darum wird das Volumen jeder 1h-Kerze gleichmässig über ihre Spanne verteilt — gut für die Form und einen ungefähren POC, nicht tick-exakt."},
   termine:{t:"Termine",what:"Kommende FOMC-, CPI- und Quartals-OPEX-Termine als Marker am oberen Rand der Zukunftszone. Diese Termine sind historisch mit erhöhter Volatilität verbunden.",hist:"WICHTIG: Die Analog-Verteilung WEISS NICHTS von diesen Terminen — die historischen Fenster hatten nicht zwingend in 5 Tagen ein FOMC. Die Marker sind eine manuelle Erinnerung an einen bekannten Vola-Katalysator, den die Statistik ausblendet, kein Teil der Rechnung. Termine bis Ende 2026 (CPI) bzw. 2027 (FOMC); danach nachzupflegen."},
   funding:{t:"Positionierung & Leverage",what:"Funding Rate und Open Interest des BTC-Perpetual (Binance, keyless) — wie überhebelt/einseitig der Markt gerade positioniert ist. Funding > 0: Longs zahlen Shorts (Long-Crowding); < 0: umgekehrt. ~0,01%/8h ist die neutrale Basis. Open Interest = offenes Kontraktvolumen in USD. Mit dem Toggle „Funding ins Regime\" wird Funding zur 6. Matching-Dimension — dann zählen nur Vergangenheits-Momente mit ähnlichem Leverage-Bild.",hist:"Bewusst GEMESSEN, nicht modelliert — das ist der Unterschied zu Liquidations-Heatmaps, die Hebel der Einzelpositionen nur annehmen (Schätzung auf Schätzung). Zwei ehrliche Grenzen: (1) Funding gibt es erst seit ~2019/2020 — schaltest du es ins Regime, werden Analoga faktisch auf die Perp-Ära ab 2020 eingeschränkt (frühe Historie hat kein Funding und fällt raus). Das ist oft sogar relevanter, weil BTCs Derivate-Markt damals ein anderer war. (2) Open Interest gibt es bei Binance frei nur ~30 Tage zurück — darum nur heutiger Kontext, NICHT im historischen Matching. Funding-Extreme hängen historisch mit Squeezes zusammen, sind aber für sich genommen kein Timing-Signal. Auf der Gold-Seite stammt beides vom PAXG-Perpetual — deutlich jünger und dünner gehandelt als das BTC-Perp, die Werte entsprechend gröber lesen."},
   triang:{t:"Triangulation",what:"Vergleicht die erwartete Streuung der drei Methoden auf dem mittleren Horizont. Zeigt jeweils die 10–90%-Spanne — also wo 80% der Ausgänge lagen bzw. erwartet werden.",hist:"Der eigentliche Wert liegt im Vergleich. Aber er ist kein Eins-zu-eins: implizite Vola (DVOL) liegt wegen der Risikoprämie im Schnitt über realisierter Vola, deshalb ist ein moderater Überhang gegenüber der Historie der Normalfall, kein Signal. Erst ein DEUTLICHER Überhang heisst „der Markt erwartet wirklich mehr Unsicherheit\"; und ein DVOL UNTER der Historie — trotz der üblichen Prämie — ist das eigentlich auffällige, weil seltene Zeichen von Selbstzufriedenheit. Die Interpretationszeile unten liest die Zahlen genau so."},
-  cycle:{t:"Zyklus-Kontext & Termine",what:"Strukturelle Anker, die das Verhalten beeinflussen: die Halving-Phase (BTCs grober 4-Jahres-Rhythmus), die Zeit seit dem letzten Hoch, sowie die nächsten FOMC-, CPI- und Quartals-OPEX-Termine — um die herum sich Volatilität historisch ballt. Dazu die 30-Tage-Veränderung als Euphorie-Basisrate: verdoppelt sich der Preis binnen ~30 Tagen, war das historisch eines der zuverlässigsten Überhitzungs-Signale (danach folgten regelmässig Rücksetzer von −60% und mehr) — dann erscheint hier ein ⚠ Blasen-Radar-Hinweis. Weiche Tendenz aus wenigen historischen Fällen, kein Timing-Signal.",hist:"FOMC-Termine stammen vom offiziellen Fed-Kalender (federalreserve.gov), CPI-Termine vom BLS (bls.gov) — Stand 21.06.2026, beide Monate im Voraus offiziell publiziert. Es ist eine gepflegte, statische Liste, kein Live-Abruf: Termine reichen aktuell bis Ende 2026 (CPI) bzw. 2027 (FOMC) und müssen irgendwann nachgetragen werden. Halving-Phase und OPEX sind dagegen exakt berechenbar und veralten nie. Läuft eine Terminliste zur Neige (<60 Tage Restlauf), erscheint hier ein sichtbarer ⚠-Hinweis zum Nachpflegen — die Warnung steckt also nicht mehr nur in diesem Text. Auf der Gold-Seite entfallen Halving und Quartals-OPEX (Krypto-Strukturen); FOMC und CPI bleiben — für Gold als zinssensitives Asset sogar besonders relevant."},
+  cycle:{t:"Zyklus-Kontext & Termine",what:"Strukturelle Anker, die das Verhalten beeinflussen: die Halving-Phase (BTCs grober 4-Jahres-Rhythmus), die Zeit seit dem letzten Hoch, sowie die nächsten FOMC-, CPI- und Quartals-OPEX-Termine — um die herum sich Volatilität historisch ballt. Dazu die 30-Tage-Veränderung als Euphorie-Basisrate: verdoppelt sich der Preis binnen ~30 Tagen, war das historisch eines der zuverlässigsten Überhitzungs-Signale (danach folgten regelmässig Rücksetzer von −60% und mehr) — dann erscheint hier ein ⚠ Blasen-Radar-Hinweis. Weiche Tendenz aus wenigen historischen Fällen, kein Timing-Signal.",hist:"FOMC-Termine stammen vom offiziellen Fed-Kalender (federalreserve.gov), CPI-Termine vom BLS (bls.gov) — Stand 21.06.2026, beide Monate im Voraus offiziell publiziert. Es ist eine gepflegte, statische Liste, kein Live-Abruf: Termine reichen aktuell bis Ende 2026 (CPI) bzw. 2027 (FOMC) und müssen irgendwann nachgetragen werden. Halving-Phase und OPEX sind dagegen exakt berechenbar und veralten nie. Läuft eine Terminliste zur Neige (<60 Tage Restlauf), erscheint hier ein sichtbarer ⚠-Hinweis zum Nachpflegen — die Warnung steckt also nicht mehr nur in diesem Text. Auf der Gold-Seite entfallen Halving und Quartals-OPEX (Krypto-Strukturen); FOMC und CPI bleiben — für Gold als zinssensitives Asset sogar besonders relevant. Die langen FOMC/Zinszyklen seit 1968 sind direkt in der Gold-Kurshistorie abgebildet."},
   clock:{t:"Markt-Uhr",what:"Zeigt, ob bestimmte Wochentage (und bei 4h: Tageszeiten) historisch häufiger positiv schlossen, plus die durchschnittliche Bewegung. % = Anteil positiver Bars an diesem Tag.",hist:"Reale Mikrostruktur-Effekte über Liquidität und Sessions — aber schwach, nicht stationär und nicht handelbar. Abweichungen von 50% sind meist klein und wandern über die Zeit. Auf Wochen-Basis nicht aussagekräftig."},
   round:{t:"Runde Zahlen",what:"Blendet die nächstgelegenen runden Preismarken ein ($10k-Schritte). An solchen Marken ballen sich oft Orders, weshalb sie als weiche Unterstützung/Widerstand wirken können.",hist:"Ein realer behavioraler Effekt (Menschen setzen Ziele und Stops an runden Zahlen), aber weich und unzuverlässig — die Linien sind Orientierung, keine Garantie für Wendepunkte."},
 };
@@ -369,6 +369,26 @@ async function fetchOHLC(interval,startMs){
   }
   if(out.length) out.pop();   // laufende (unfertige) Kerze entfernen
   return out;
+}
+
+/* Gold-Langzeithistorie via Worker /goldhistory (LBMA PM Fixing ab ~1968).
+   Konvertiert die [[ms,price],...]-Zeitreihe in OHLC-ähnliche Tageskerzen (nur Close).
+   Für 1W: aggregiert zu Wochenkerzen (letzter Close je ISO-Woche).
+   Fallback auf fetchOHLC wenn Worker antwortet aber Daten leer. */
+async function fetchGoldHistory(workerUrl,interval,barSec){
+  const d=await jgetRetry(workerUrl+"/goldhistory");
+  if(!d||!d.series||!d.series.length)throw new Error("goldhistory: keine Daten");
+  // Tageskerzen aus [[ms,price],...] aufbauen
+  let rows=d.series.map(([ms,p])=>({t:Math.floor(ms/1000),o:p,h:p,l:p,c:p}));
+  if(interval==="1w"){
+    // Wochenkerzen: gruppiere nach ISO-Woche (Montag)
+    const wk=ms=>{const d=new Date(ms*1000);d.setUTCHours(0,0,0,0);const day=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()-day+1);return d.getTime()/1000;};
+    const map=new Map();
+    for(const r of rows){const w=wk(r.t);if(!map.has(w))map.set(w,r.c);else map.set(w,r.c);} // letzter Close
+    rows=[...map.entries()].sort((a,b)=>a[0]-b[0]).map(([t,c])=>({t,o:c,h:c,l:c,c}));
+  }
+  if(rows.length)rows.pop(); // laufende Kerze entfernen
+  return rows;
 }
 
 /* Funding Rate (BTCUSDT Perp, keyless) — volle Historie seit Contract-Start (~2019-09), 8h-Takt.
@@ -648,13 +668,13 @@ const ASSETS={
     dvol:true,epochs:true,halving:true,
     tag:"Wann sah BTC schon einmal so aus — und wie ging es danach aus?",
     banner:"<b>Vergangene Häufigkeit, keine Vorhersage.</b> Das Tool zeigt echte historische Pfade nach ähnlichen Lagen. Märkte sind nicht stationär — was früher folgte, muss sich nicht wiederholen. <b>BTC hat erst ~3 vollständige Zyklen</b>: jede Statistik hier stützt sich auf sehr wenige unabhängige Fälle."},
-  gold:{key:"gold",sym:"PAXGUSDT",name:"Gold",spotStart:"2019-09-26T00:00:00Z",fundStart:"2019-09-26T00:00:00Z",
-    dvol:false,epochs:false,halving:false,
+  gold:{key:"gold",sym:"PAXGUSDT",name:"Gold",spotStart:"1968-04-01T00:00:00Z",fundStart:"2019-09-26T00:00:00Z",
+    dvol:false,epochs:false,halving:false,workerBased:true,  // Kerzen via Worker /goldhistory (LBMA ab 1968); PAXG als Fallback
     tag:"Wann sah Gold schon einmal so aus — und wie ging es danach aus?",
-    banner:"<b>Vergangene Häufigkeit, keine Vorhersage.</b> Das Tool zeigt echte historische Pfade nach ähnlichen Lagen. Märkte sind nicht stationär. <b>Die Gold-Historie hier beginnt erst mit PAXG (~2019/21)</b> — noch weniger unabhängige Fälle als bei BTC, und die grossen Gold-Regimes vor 2019 (1971–2011) fehlen komplett. PAXG ist ein Gold-Token (1 = 1 Feinunze), kein LBMA-Fixing."},
+    banner:"<b>Vergangene Häufigkeit, keine Vorhersage.</b> Das Tool zeigt echte historische Pfade nach ähnlichen Lagen. Märkte sind nicht stationär. <b>Gold: LBMA-Tageskurse ab ~1968 via Worker (FRED GOLDPMGBD228NLBM)</b> — ~57 Jahre, echte Gold-Zyklen inkl. Volcker-Schock, Dotcom, 2008. Ohne Worker-URL: Fallback auf PAXG (~3 Jahre)."},
 };
 let ASSET=ASSETS.btc;
-const EP_ALL={k:"all",s:"PAXG-Ära",c:"#5B6B7E"};
+const EP_ALL={k:"all",s:"LBMA-Ära (ab 1968)",c:"#5B6B7E"};
 
 const TF={
   "4h":{iv:"4h",barSec:14400,  start:()=>Date.now()-6000*14400*1000, win:42,wmin:24,wmax:96, gap:12, ddWin:2190, regS:300,regL:1200, maS:300, maL:1200, maSL:"50T", maLL:"200T", H:[["1 Tag",6,"1T"],["3 Tage",18,"3T"],["1 Woche",42,"1W"]]},
@@ -673,6 +693,16 @@ function saveSettings(){try{
   }));
 }catch(_){}}
 function loadSettings(){try{const s=JSON.parse(localStorage.getItem("btf_settings"));return (s&&typeof s==="object")?s:null;}catch(_){return null;}}
+/* Worker-URL für Gold-Langzeithistorie. Gesetzt via ?worker=URL (einmalig) oder direkt in localStorage.
+   Fällt sie weg -> Fallback auf PAXG (kurze Historie). */
+function getWorkerUrl(){
+  try{
+    const p=new URLSearchParams(location.search).get("worker");
+    if(p){localStorage.setItem("btf_workerUrl",p);return p;}
+    return localStorage.getItem("btf_workerUrl")||"";
+  }catch(_){return"";}
+}
+const BTF_WORKER=getWorkerUrl();
 function applySettings(s){
   try{
     if(typeof s.sim==="number"){const el=$("cSim");const v=Math.min(+el.max,Math.max(+el.min,s.sim));el.value=v;$("vSim").textContent=v+"%";}
@@ -694,7 +724,10 @@ function applySettings(s){
 function applyAssetTexts(){
   $("assetTag").textContent=ASSET.tag;
   $("bannerTxt").innerHTML=ASSET.banner;
-  $("srcQuelle").textContent="Quelle: Binance "+ASSET.sym+" Kerzen"+(ASSET.key==="gold"?" (PAXG-Gold-Proxy, 1 Token = 1 Feinunze — kein LBMA-Fixing)":"");
+  const goldSrc=ASSET.key==="gold"
+    ? (BTF_WORKER?"LBMA Gold PM Fixing ab 1968 via Worker (FRED)":"PAXG-Fallback (Binance) — Worker-URL fehlt, nur ~3 Jahre")
+    : "";
+  $("srcQuelle").textContent="Quelle: "+(ASSET.key==="gold"?goldSrc:"Binance "+ASSET.sym+" Kerzen");
   $("srcSingle").textContent=ASSET.dvol?"Binance Spot/Futures, Deribit":"Binance Spot/Futures — kein Options-Vol-Index für Gold, das Triangulations-Panel zeigt dort „—“";
   const tg=document.querySelector('.tg[data-tg="dvol"]');if(tg)tg.style.display=ASSET.dvol?"":"none";
 }
@@ -734,8 +767,14 @@ async function loadTF(tf){
   $("status").style.display="block"; $("status").className="status";
   $("status").textContent=`Lade ${ASSET.name}-Verlauf (${tf}) …`;
   try{
-    const raw=await fetchOHLC(cfg.iv,cfg.start());
-    if(raw.length<Math.max(250,cfg.maL/4)){$("status").textContent="Zu wenig Kursdaten geladen.";loadingTF=false;return;}
+    // Gold via Worker (/goldhistory = LBMA ab 1968) — Fallback auf PAXG wenn kein Worker
+    let raw;
+    if(ASSET.workerBased&&BTF_WORKER){
+      raw=await fetchGoldHistory(BTF_WORKER,cfg.iv,cfg.barSec);
+    } else {
+      raw=await fetchOHLC(cfg.iv,cfg.start());
+    }
+    if(raw.length<Math.max(100,cfg.maL/4)){$("status").textContent="Zu wenig Kursdaten geladen.";loadingTF=false;return;}
     const c=raw.map(x=>x.c);
     const s50=sma(c,cfg.regS),s200=sma(c,cfg.regL),rs=rsi(c,14),rv=realizedVol(c,14),dd=rollingDD(c,cfg.ddWin);
     const s50w=sma(c,cfg.maS),s200w=sma(c,cfg.maL);   // Kontext-Linien (Anzeige)
@@ -952,7 +991,7 @@ function confidence(scan,paths,mode,sim,tol,W){
   const chip={robust:"robust",solide:"solide",fragil:"fragil"}[level];
   const cls=level==="robust"?"up":level==="solide"?"nu":"dn";
   const epochText=!epActive
-      ? "Epochen-Prüfung nur auf der BTC-Seite — die PAXG-Historie ist für eine ehrliche Epochen-Einteilung zu kurz (eine Ära)"
+      ? "Epochen-Prüfung nur auf der BTC-Seite — für Gold (LBMA ab 1968) gibt es keine sinnvollen diskreten Epochen wie bei BTC"
       : epStale
       ? `überwiegend aus der ${em.domKey==="pre"?"Vor-2020":"Prä-ETF"}-Ära — die heutige Marktstruktur (ETF, Institutionen) ist dort kaum vertreten, also breiter denken`
       : em.domShare>0.7?`geballt in der ${EPOCHS[em.domKey].s}-Ära`
