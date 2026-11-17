@@ -119,6 +119,9 @@
   .hcard .hz .n{font-family:var(--mono);font-size:11px;color:var(--mut)}
   .hrow{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;font-size:13px}
   .hrow .k{color:var(--mut)}
+  .hrow.cmp{font-size:12px;padding-top:0;margin-top:-2px}.hrow.cmp .v{color:var(--mut)}
+  .hnote{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--mut)}
+  .cmp{color:var(--mut);font-weight:400}
   .hrow .v{font-family:var(--disp);font-weight:600;font-variant-numeric:tabular-nums}
   .up{color:var(--teal)} .dn{color:var(--coral)} .nu{color:var(--ink)}
 
@@ -315,7 +318,7 @@
 
 <div class="foot" id="foot" style="display:none">
   <span id="srcQuelle">Quelle: Binance BTCUSDT Tageskerzen</span> · Matching: Pearson-Korrelation der TRENDBEREINIGTEN log-Form + Regime-Buckets · Episoden-bereinigt (überlappende Treffer zählen einmal) · keine Zukunfts-Information im Matching (Indikatoren rückwärtsgerichtet, Vol-Perzentil expandierend).
-  <br><span id="dataStamp"></span> · Einzelquellen ohne Redundanz: <span id="srcSingle">Binance Spot/Futures, Deribit</span> — fällt eine aus, zeigt ihr Panel ehrlich „—" statt einer Schätzung · Terminlisten-Stand 17.11.2026 · <b>Back to the Future v13</b>
+  <br><span id="dataStamp"></span> · Einzelquellen ohne Redundanz: <span id="srcSingle">Binance Spot/Futures, Deribit</span> — fällt eine aus, zeigt ihr Panel ehrlich „—" statt einer Schätzung · Terminlisten-Stand 17.11.2026 · <b>Back to the Future v14</b>
   <br>Panta Rey: <a href="https://panta-rey.github.io/Dashboard/dashboard.html">Dashboard ↗</a> · <a href="https://panta-rey.github.io/BTC/">BTC-Ampel ↗</a>
 </div>
 
@@ -343,14 +346,14 @@ const EB={
   sim:{t:"Ähnlichkeit (Form)",what:"Wie stark die trendbereinigte Form übereinstimmen muss — Korrelation der Krümmung, nachdem aus jedem Fenster die lineare Steigung herausgerechnet wurde. 80% = nur sehr ähnlich geformte Verläufe zählen.",hist:"Achtung: Diese Prozente sind NICHT mit einer naiven Korrelation roher Preise vergleichbar — nach der Trendbereinigung fallen die Werte naturgemäss tiefer aus, weil die dominante gemeinsame Trendkomponente fehlt. Eine trendbereinigte Korrelation von 60–70% ist bereits eine echte Formähnlichkeit. Höher = strenger, weniger Treffer; wenn oben „zu wenige Analoga\" steht, hier senken."},
   tol:{t:"Regime-Toleranz",what:"Wie weit die Marktlage abweichen darf. 0 = exakt dieselben Buckets bei Mayer, RSI, Volatilität, Drawdown und Trend. Höhere Werte erlauben ähnliche, nicht identische Lagen.",hist:"Strenger (0–1) = bedeutungsvollere, aber seltenere Analoga. Lockerer = mehr Treffer, aber die Lagen sind weniger vergleichbar. Im Modus „Form\" ohne Wirkung."},
   fan:{t:"Der Forward-Fächer",what:"Jede dünne Linie ist ein ECHTER historischer Kursverlauf nach einer ähnlichen Lage, ab heute nach rechts projiziert (grün = endete höher, koralle = tiefer). Die gestrichelte indigo Linie ist der Median der Analoga — bewusst dünn und gestrichelt, damit sie nicht als Prognose-Linie missverstanden wird. Die Punkte unten markieren, wo in der Historie die Analoga liegen.",hist:"Das ist Vergangenheit, in die Zukunft gelegt — keine Vorhersage, und der Median erst recht kein Kursziel. Laufen die Linien weit auseinander, war der Ausgang historisch sehr unsicher; bündeln sie sich, war er einheitlicher. Märkte sind nicht stationär: Regimewechsel (ETF, Makro, Regulierung) können das Muster jederzeit entwerten."},
-  dist:{t:"Verteilung je Horizont",what:"Fasst die historischen Pfade je Zeithorizont zusammen. positiv = Anteil der Episoden, die höher endeten. Median = mittlere Veränderung. Spanne 10–90% = wo 80% der Ausgänge lagen. Ø grösster Dip = der typische tiefste Punkt unterwegs. Der Zeitstrahl darüber zeigt, WANN in der Historie die Episoden liegen.",hist:"Der Dip ist oft wichtiger als der Median: auch ein positiv endender Pfad kann zwischendurch tief eingebrochen sein — das ist das Pfad-Risiko, das eine reine Endzahl verschweigt. „Episoden\" sind unabhängige historische Fälle (zusammenhängende Treffer-Tage zu einem zusammengefasst). Aber Vorsicht: Die Episoden-Bereinigung löst nur die KURZFRISTIGE Autokorrelation. Klumpen alle Episoden in einer einzigen Marktphase (z.B. nur ein Bullenlauf), sind sie makroökonomisch trotzdem fast EINE Beobachtung — darum der Konzentrations-Hinweis über den Karten. BTC hat seit 2017 nur eine Handvoll wirklich unabhängiger Zyklen; eine hohe Episodenzahl täuscht leicht statistische Sicherheit vor. Die FARBE der Punkte auf dem Zeitstrahl zeigt die Markt-Epoche (grau = Prä-2020, cyan = 2020–23, gold = ETF-Ära ab 2024) — so siehst du sofort, ob die Stichprobe die heutige Marktstruktur überhaupt enthält. Auf der Gold-Seite gibt es keine Epochen-Einteilung: die XAU/USD-Serie ab 1980 ist eine einzige kontinuierliche Ära. Die langen Gold-Zyklen sind der eigentliche Mehrwert — der Blow-off-Top 1980, der 20-Jahre-Bär, das 2011er-Top und der 2013er-Crash sind alle enthalten. Mit ~46 Jahren Tageskerzen (~12000 Handelstage) bleibt das n-Problem bestehen: die grossen Gold-Zyklen sind lang, es gibt nur wenige unabhängige Fälle."},
+  dist:{t:"Verteilung je Horizont",what:"Fasst die historischen Pfade je Zeithorizont zusammen. positiv = Anteil der Episoden, die höher endeten. Median = mittlere Veränderung. Spanne 10–90% = wo 80% der Ausgänge lagen. Ø grösster Dip = der typische tiefste Punkt unterwegs. Der Zeitstrahl darüber zeigt, WANN in der Historie die Episoden liegen.",hist:"Der Dip ist oft wichtiger als der Median: auch ein positiv endender Pfad kann zwischendurch tief eingebrochen sein — das ist das Pfad-Risiko, das eine reine Endzahl verschweigt. „Episoden\" sind unabhängige historische Fälle (zusammenhängende Treffer-Tage zu einem zusammengefasst). Aber Vorsicht: Die Episoden-Bereinigung löst nur die KURZFRISTIGE Autokorrelation. Klumpen alle Episoden in einer einzigen Marktphase (z.B. nur ein Bullenlauf), sind sie makroökonomisch trotzdem fast EINE Beobachtung — darum der Konzentrations-Hinweis über den Karten. BTC hat seit 2017 nur eine Handvoll wirklich unabhängiger Zyklen; eine hohe Episodenzahl täuscht leicht statistische Sicherheit vor. Die FARBE der Punkte auf dem Zeitstrahl zeigt die Markt-Epoche (grau = Prä-2020, cyan = 2020–23, gold = ETF-Ära ab 2024) — so siehst du sofort, ob die Stichprobe die heutige Marktstruktur überhaupt enthält. Auf der Gold-Seite gibt es keine Epochen-Einteilung: die XAU/USD-Serie ab 1980 ist eine einzige kontinuierliche Ära. Die langen Gold-Zyklen sind der eigentliche Mehrwert — der Blow-off-Top 1980, der 20-Jahre-Bär, das 2011er-Top und der 2013er-Crash sind alle enthalten. Mit ~46 Jahren Tageskerzen (~12000 Handelstage) bleibt das n-Problem bestehen: die grossen Gold-Zyklen sind lang, es gibt nur wenige unabhängige Fälle. RÜCKTEST (November 2026): Das Werkzeug wurde durch die Geschichte geschickt (Gold ab 1987, BTC ab 2014) und musste an jedem Stichtag nur mit dem damaligen Wissen rechnen. Ergebnis 1: «x von n höher» sagte die Richtung nie besser voraus als der allgemeine Wert («zum Vergleich: allgemein») — deshalb steht dieser jetzt daneben. Ergebnis 2: Die Spanne 10–90% der ähnlichen Lagen ist als Blick nach vorn zu schmal; sie enthielt den späteren Kurs nur in 6 bis 7 von 10 Fällen statt 8. Je weniger Fälle, desto schmaler; die Karte nennt die erfahrungsgemässe Trefferzahl."},
   analogs:{t:"Historische Analoga",what:"Die einzelnen Vergangenheits-Momente, die zur heutigen Lage passen — mit Datum, Ähnlichkeit (Form-Korrelation) und dem tatsächlichen Ausgang nach den drei Horizonten. Antippen springt im Chart zu diesem Moment.",hist:"So siehst du, AUS WELCHEN echten Momenten die Statistik stammt — nicht nur eine Zahl, sondern die konkreten Vorbilder. Wenige, sehr alte oder stark verstreute Analoga solltest du mit Vorsicht lesen. Der farbige Punkt vor dem Datum markiert die Markt-Epoche (grau/cyan/gold = Prä-2020 / 2020–23 / ETF-Ära)."},
   vertrauen:{t:"Vertrauen / Belastbarkeit",what:"Ein zusammengefasstes Urteil, wie sehr du der Statistik trauen kannst — gebündelt aus drei Dingen: (1) Anzahl unabhängiger Episoden, (2) über welche Markt-Epochen sie streuen (Prä-2020 / 2020–23 / ETF-Ära ab 2024), (3) Fragilität: wie stark der Median springt, wenn man Ähnlichkeit, Toleranz ODER das Fenster nur leicht variiert — die gemessene Spannweite steht in Prozentpunkten (Pp) in der Belastbarkeits-Zeile. Das Urteil richtet sich nach dem SCHWÄCHSTEN dieser drei.",hist:"Bewusst EIN Signal statt vieler Einzelwarnungen — sonst stumpfst du gegen Caveats ab (Council-Entscheid). „fragil\" heisst nicht falsch, sondern: die Aussage hängt stark an deiner genauen Regler-Wahl, also nicht überinterpretieren. Der Epochen-Teil ist der ehrlichste: stammen fast alle Analoga aus der Vor-ETF-Zeit, beschreiben sie eine Marktstruktur, die es so nicht mehr gibt — die heutige ETF-/Institutionen-Ära ist erst ~2 Jahre alt und liefert zwangsläufig wenige Vergleichsfälle. Kein Grund, die Historie zu verwerfen, aber ein Grund, den Unsicherheitsfächer breiter zu denken. Bewusst nur ein LABEL, kein Filter — sonst würde man die Epoche so lange wählen, bis die Geschichte gefällt. Auf der Gold-Seite entfällt der Epochen-Teil des Urteils — das Vertrauen stützt sich dort auf Stichprobengrösse und Fragilität. Mit ~46 Jahren Tageskerzen (~11'500 Handelstage) ist das Stichproben-Problem deutlich entschärft gegenüber den ~3 Jahren PAXG."},
   projektionen:{t:"Projektionen",what:"Drei unabhängige Sichten auf die mögliche Streuung ab heute, je einzeln ein-/ausblendbar. Analog-Fächer = echte Vergangenheits-Pfade nach ähnlichen Lagen (grün endete höher, koralle tiefer; gestrichelte Linie = Median). Bootstrap-Kegel = tausende simulierte Pfade aus BTCs Schwankung, um den heutigen Preis zentriert (reine Streuung, keine Richtung). DVOL-Band = die vom Optionsmarkt erwartete Streuung (±1σ/2σ).",hist:"Jede misst anders: der Fächer rückblickend-konkret inkl. echtem Drift, der Bootstrap driftfrei-simuliert, das DVOL-Band vorausschauend aus Optionspreisen (~30-Tage-Vola per Wurzel-t skaliert; enthält eine Risikoprämie, liegt also strukturell etwas über realisiert). Decken sich alle drei, ist das Bild konsistenter. Keine davon ist eine Vorhersage."},
   linien:{t:"Linien",what:"Orientierungs-Marken auf den Kerzen, je einzeln zuschaltbar. Runde Zahlen ($10k-Marken). Swing-Level (jüngste Pivot-Hochs/-Tiefs als weiche S/R — Koralle=Widerstand, Teal=Unterstützung). Volume Profile (POC = meistgehandeltes Level + Value Area = 70%-Volumen-Band der letzten 90 Tage).",hist:"Weiche behaviorale Orientierung — an solchen Marken clustern reale Orders/Stops, sie wirken oft als Magnet oder S/R, sind aber keine garantierten Wendepunkte. Das Volume Profile ist GEMESSEN (echtes Volumen), aber eine APPROXIMATION: echtes Volumen-pro-Preis bräuchte Tick-Daten (nicht frei machbar), darum wird das Volumen jeder 1h-Kerze gleichmässig über ihre Spanne verteilt — gut für die Form und einen ungefähren POC, nicht tick-exakt."},
   termine:{t:"Termine",what:"Kommende FOMC-, CPI- und Quartals-OPEX-Termine als Marker am oberen Rand der Zukunftszone. Diese Termine sind historisch mit erhöhter Volatilität verbunden.",hist:"WICHTIG: Die Analog-Verteilung WEISS NICHTS von diesen Terminen — die historischen Fenster hatten nicht zwingend in 5 Tagen ein FOMC. Die Marker sind eine manuelle Erinnerung an einen bekannten Vola-Katalysator, den die Statistik ausblendet, kein Teil der Rechnung. Termine bis Ende 2026 (CPI) bzw. 2027 (FOMC); danach nachzupflegen."},
   funding:{t:"Positionierung & Leverage",what:"Funding Rate und Open Interest des BTC-Perpetual (Binance, keyless) — wie überhebelt/einseitig der Markt gerade positioniert ist. Funding > 0: Longs zahlen Shorts (Long-Crowding); < 0: umgekehrt. ~0,01%/8h ist die neutrale Basis. Open Interest = offenes Kontraktvolumen in USD. Mit dem Toggle „Funding ins Regime\" wird Funding zur 6. Matching-Dimension — dann zählen nur Vergangenheits-Momente mit ähnlichem Leverage-Bild.",hist:"Bewusst GEMESSEN, nicht modelliert — das ist der Unterschied zu Liquidations-Heatmaps, die Hebel der Einzelpositionen nur annehmen (Schätzung auf Schätzung). Zwei ehrliche Grenzen: (1) Funding gibt es erst seit ~2019/2020 — schaltest du es ins Regime, werden Analoga faktisch auf die Perp-Ära ab 2020 eingeschränkt (frühe Historie hat kein Funding und fällt raus). Das ist oft sogar relevanter, weil BTCs Derivate-Markt damals ein anderer war. (2) Open Interest gibt es bei Binance frei nur ~30 Tage zurück — darum nur heutiger Kontext, NICHT im historischen Matching. Funding-Extreme hängen historisch mit Squeezes zusammen, sind aber für sich genommen kein Timing-Signal. Auf der Gold-Seite: Positionierungs-Daten (Funding/OI) stammen vom PAXG-Perpetual auf Binance, nicht vom eigentlichen Gold-Terminmarkt — deutlich jünger und dünner als das BTC-Perp, also nur ein schmaler Ausschnitt der Gold-Positionierung."},
-  triang:{t:"Triangulation",what:"Vergleicht die erwartete Streuung der drei Methoden auf dem mittleren Horizont. Zeigt jeweils die 10–90%-Spanne — also wo 80% der Ausgänge lagen bzw. erwartet werden.",hist:"Der eigentliche Wert liegt im Vergleich. Aber er ist kein Eins-zu-eins: implizite Vola (DVOL) liegt wegen der Risikoprämie im Schnitt über realisierter Vola, deshalb ist ein moderater Überhang gegenüber der Historie der Normalfall, kein Signal. Erst ein DEUTLICHER Überhang heisst „der Markt erwartet wirklich mehr Unsicherheit\"; und ein DVOL UNTER der Historie — trotz der üblichen Prämie — ist das eigentlich auffällige, weil seltene Zeichen von Selbstzufriedenheit. Die Interpretationszeile unten liest die Zahlen genau so."},
+  triang:{t:"Triangulation",what:"Vergleicht die erwartete Streuung der drei Methoden auf dem mittleren Horizont. Zeigt jeweils die 10–90%-Spanne — also wo 80% der Ausgänge lagen bzw. erwartet werden.",hist:"Der eigentliche Wert liegt im Vergleich. Aber er ist kein Eins-zu-eins: implizite Vola (DVOL) liegt wegen der Risikoprämie im Schnitt über realisierter Vola, deshalb ist ein moderater Überhang gegenüber der Historie der Normalfall, kein Signal. Erst ein DEUTLICHER Überhang heisst „der Markt erwartet wirklich mehr Unsicherheit\"; und ein DVOL UNTER der Historie — trotz der üblichen Prämie — ist das eigentlich auffällige, weil seltene Zeichen von Selbstzufriedenheit. Die Interpretationszeile unten liest die Zahlen genau so. RÜCKTEST (November 2026): Von den Spannen wurde gemessen, wie oft der spätere Kurs wirklich darin lag (Soll 8 von 10). Bootstrap: 8 bis 9 von 10, bei Gold wie bei BTC — eher etwas zu weit, nie zu eng. Ähnliche Lagen: 6 bis 7 von 10, weil die Spanne aus wenigen Fällen stammt. Der Optionsmarkt (DVOL) wurde nicht rückgetestet."},
   cycle:{t:"Zyklus-Kontext & Termine",what:"Strukturelle Anker, die das Verhalten beeinflussen: die Halving-Phase (BTCs grober 4-Jahres-Rhythmus), die Zeit seit dem letzten Hoch, sowie die nächsten FOMC-, CPI- und Quartals-OPEX-Termine — um die herum sich Volatilität historisch ballt. Dazu die 30-Tage-Veränderung als Euphorie-Basisrate: verdoppelt sich der Preis binnen ~30 Tagen, war das historisch eines der zuverlässigsten Überhitzungs-Signale (danach folgten regelmässig Rücksetzer von −60% und mehr) — dann erscheint hier ein ⚠ Blasen-Radar-Hinweis. Weiche Tendenz aus wenigen historischen Fällen, kein Timing-Signal.",hist:"FOMC-Termine stammen vom offiziellen Fed-Kalender (federalreserve.gov), CPI-Termine vom BLS (bls.gov) — Stand 21.06.2026, beide Monate im Voraus offiziell publiziert. Es ist eine gepflegte, statische Liste, kein Live-Abruf: Termine reichen aktuell bis Ende 2026 (CPI) bzw. 2027 (FOMC) und müssen irgendwann nachgetragen werden. Halving-Phase und OPEX sind dagegen exakt berechenbar und veralten nie. Läuft eine Terminliste zur Neige (<60 Tage Restlauf), erscheint hier ein sichtbarer ⚠-Hinweis zum Nachpflegen — die Warnung steckt also nicht mehr nur in diesem Text. Auf der Gold-Seite entfallen Halving und Quartals-OPEX (Krypto-Strukturen); FOMC und CPI bleiben — für Gold als zinssensitives Asset sogar besonders relevant. Die langen FOMC/Zinszyklen seit 1980 sind direkt in der Gold-Kurshistorie abgebildet."},
   clock:{t:"Markt-Uhr",what:"Zeigt, ob bestimmte Wochentage (und bei 4h: Tageszeiten) historisch häufiger positiv schlossen, plus die durchschnittliche Bewegung. % = Anteil positiver Bars an diesem Tag.",hist:"Reale Mikrostruktur-Effekte über Liquidität und Sessions — aber schwach, nicht stationär und nicht handelbar. Abweichungen von 50% sind meist klein und wandern über die Zeit. Auf Wochen-Basis nicht aussagekräftig."},
   round:{t:"Runde Zahlen",what:"Blendet die nächstgelegenen runden Preismarken ein ($10k-Schritte). An solchen Marken ballen sich oft Orders, weshalb sie als weiche Unterstützung/Widerstand wirken können.",hist:"Ein realer behavioraler Effekt (Menschen setzen Ziele und Stops an runden Zahlen), aber weich und unzuverlässig — die Linien sind Orientierung, keine Garantie für Wendepunkte."},
@@ -985,6 +988,21 @@ function recompute(){
   renderTriangulation(paths);
 }
 
+/* v14 — zwei Lesehilfen aus dem Rücktest vom 17.11.2026 (Gold ab 1987, BTC ab 2014; siehe Savepoint):
+   (1) baseRate(h): Wie oft stand der Kurs nach h Balken GANZ ALLGEMEIN höher? Ohne diesen Vergleichswert
+       ist „12 von 29 höher" nicht lesbar. Im Rücktest sagte der Analog-Wert die Richtung nie besser
+       voraus als dieser allgemeine Wert — deshalb steht er jetzt daneben.
+   (2) fanHit(n): Eine 10–90%-Spanne aus n Fällen enthält einen neuen Fall im besten Fall nur in rund
+       (n−1)/(n+1)·80 % der Fälle (bei n=8 etwa 6 von 10). Der Rücktest hat das bestätigt (Analog-Spanne
+       traf 6 bis 7 von 10, der Bootstrap-Kegel 8 bis 9). Reine Rechnung aus n, keine Anpassung. */
+function baseRate(h){
+  if(!D||h<1||D.N-h<30)return null;
+  D.base=D.base||{};
+  if(D.base[h]==null){let pos=0,n=0;for(let j=0;j+h<D.N;j++){n++;if(D.c[j+h]>D.c[j])pos++;}D.base[h]=Math.round(pos/n*100);}
+  return D.base[h];
+}
+function fanHit(n){return Math.min(8,Math.max(1,Math.round((n-1)/(n+1)*8)));}
+
 /* Befund-Kopfzeile = der Ein-Satz-Überblick (ersetzt die frühere separate Lesehilfe). */
 function befundHead(paths){
   if(!paths||paths.length<3)return 'Zu wenige ähnliche Lagen für eine belastbare Aussage.';
@@ -997,7 +1015,8 @@ function befundHead(paths){
   const dip=median(dips);
   const fmt=v=>(v>=0?"+":"")+v.toFixed(1)+"%";
   const tone=pos>=60?"up":pos<=40?"dn":"nu";
-  return `${paths.length} ähnliche Lagen · über <b>${lbl}</b> <b class="${tone}">${nPos} von ${rets.length}</b> höher · Median <b class="${md>=0?"up":"dn"}">${fmt(md)}</b> · Dip <b class="dn">${fmt(dip)}</b>`;
+  const br=baseRate(h),brTxt=br!=null?` <span class="cmp">(allgemein ${br} von 100)</span>`:"";
+  return `${paths.length} ähnliche Lagen · über <b>${lbl}</b> <b class="${tone}">${nPos} von ${rets.length}</b> höher${brTxt} · Median <b class="${md>=0?"up":"dn"}">${fmt(md)}</b> · Dip <b class="dn">${fmt(dip)}</b>`;
 }
 
 /* Verteilungs-Kennzahlen einer Episoden-Menge: über wie viele Jahre, wie konzentriert. */
@@ -1146,7 +1165,12 @@ function renderBefund(paths,conf){
   if(rets.length>=3){
     const p10=quantile(rets,.1),p90=quantile(rets,.9);
     const dips=paths.map(p=>{let m=0;for(let d=0;d<=h;d++)if(p.path[d]!=null&&p.path[d]<m)m=p.path[d];return m;});
-    L.push(`<b>Über ${lbl}:</b> historische Streuung ${fmt(p10)} bis ${fmt(p90)}, typischer Zwischen-Dip ${fmt(median(dips))}.`);
+    const nPos=rets.filter(x=>x>0).length,br=baseRate(h);
+    if(br!=null)L.push(`<b>Richtung über ${lbl}:</b> ${nPos} von ${rets.length} ähnlichen Lagen endeten höher; ganz allgemein waren es ${br} von 100. Im Rücktest sagte der Wert der ähnlichen Lagen die Richtung nicht besser voraus als der allgemeine.`);
+    let cone="";
+    if(BOOT&&BOOT.band.p10[h]!=null)cone=` Verlässlichere Breite: Bootstrap-Kegel ${fmt((BOOT.band.p10[h]-1)*100)} bis ${fmt((BOOT.band.p90[h]-1)*100)}.`;
+    const fh=fanHit(rets.length);
+    L.push(`<b>Breite über ${lbl}:</b> ähnliche Lagen ${fmt(p10)} bis ${fmt(p90)}`+(fh<8?` — aus ${rets.length} Fällen, erfahrungsgemäss zu schmal (trifft rund ${fh} von 10 statt 8).`:".")+cone+` Typischer Zwischen-Dip ${fmt(median(dips))}.`);
     if(DVOL!=null){
       const aw=p90-p10;
       const st=(DVOL/100)*Math.sqrt((h*BARSEC)/(365.25*86400))*1.2816;
@@ -1202,12 +1226,15 @@ function renderStats(paths){
     const posc=pos>=60?"up":pos<=40?"dn":"nu";
     const fmt=v=>(v>=0?"+":"")+v.toFixed(1)+"%";
     const arr=v=>v>=0?"▲":"▼";
+    const br=baseRate(h),fh=fanHit(rets.length);
     return `<div class="hcard">
       <div class="hz">${lbl}<span class="n">${rets.length} Episoden</span></div>
       <div class="hrow"><span class="k">positiv</span><span class="v ${posc}">${nPos} von ${rets.length} (${pos}%)</span></div>
+      ${br!=null?`<div class="hrow cmp"><span class="k">zum Vergleich: allgemein</span><span class="v">${br} von 100</span></div>`:""}
       <div class="hrow"><span class="k">Median</span><span class="v ${md>=0?'up':'dn'}">${arr(md)} ${fmt(md)}</span></div>
       <div class="hrow"><span class="k">Spanne 10–90%</span><span class="v nu">${fmt(p10)} … ${fmt(p90)}</span></div>
       <div class="hrow"><span class="k">Ø grösster Dip</span><span class="v dn">▼ ${fmt(dip)}</span></div>
+      ${fh<8?`<div class="hnote">Spanne aus ${rets.length} Fällen: trifft erfahrungsgemäss rund ${fh} von 10 statt 8.</div>`:""}
     </div>`;
   }).join("");
 }
@@ -1301,7 +1328,7 @@ function renderTriangulation(paths){
   // Implizite Vola (DVOL) liegt im Schnitt ein paar Punkte ÜBER der später realisierten Vola (Prämie für
   // Optionsverkäufer). Ein moderater Überhang ist also der Normalzustand, kein Signal — erst ein grosser
   // Überhang bzw. ein Unterschreiten der Historie ist informativ.
-  let interp="Sobald Optionsmarkt und Historie geladen sind, erscheint hier der Vergleich.";
+  let interp=ASSET.dvol?"Sobald Optionsmarkt und Historie geladen sind, erscheint hier der Vergleich.":"Für Gold gibt es keinen Options-Vol-Index — der Vergleich mit dem Optionsmarkt entfällt hier.";
   if(aHi!=null&&dHi!=null){
     const aw=aHi-aLo,dw=dHi-dLo,ratio=dw/aw;
     interp=ratio>1.4?"Der Optionsmarkt preist <b>deutlich mehr Streuung</b> ein als die Historie zeigt — mehr, als die übliche Vola-Risikoprämie erklärt. Der Markt erwartet erhöhte Unsicherheit."
@@ -1313,7 +1340,8 @@ function renderTriangulation(paths){
     <div class="tr"><span class="k"><span class="dot" style="background:#8B7CF6"></span>Historische Analoga</span><span class="v">${rng(aLo,aHi)}</span></div>
     <div class="tr"><span class="k"><span class="dot" style="background:#3FBFD0"></span>Bootstrap-Simulation</span><span class="v">${rng(bLo,bHi)}</span></div>
     <div class="tr"><span class="k"><span class="dot" style="background:#FF9E5E"></span>Optionsmarkt · DVOL ${dvolN}</span><span class="v">${rng(dLo,dHi)}</span></div>
-    <div class="interp">${interp}</div>`;
+    <div class="interp">${interp}</div>
+    <div class="interp"><b>Welche Breite stimmt?</b> Im Rücktest enthielt die Bootstrap-Spanne den späteren Kurs in 8 bis 9 von 10 Fällen, die Spanne der ähnlichen Lagen nur in 6 bis 7 (Soll: 8). Für die Frage, wie weit es gehen kann, ist der Kegel die verlässlichere Angabe.</div>`;
 }
 
 /* ===== Phase C Rendering ===== */
